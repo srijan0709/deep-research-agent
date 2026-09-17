@@ -1,0 +1,17 @@
+[
+  {
+    "question": "How would a prolonged disruption in the Strait of Hormuz affect India's economy, inflation and crude oil prices?",
+    "expected_topics": ["crude oil imports", "Strait of Hormuz", "inflation", "current account", "government policy"],
+    "required_source_types": ["government", "news"]
+  },
+  {
+    "question": "What are the main drivers of electric vehicle adoption in the United States?",
+    "expected_topics": ["EV incentives", "charging infrastructure", "battery cost", "consumer demand"],
+    "required_source_types": ["government", "news"]
+  },
+  {
+    "question": "What is the current scientific consensus on the health effects of intermittent fasting?",
+    "expected_topics": ["metabolic health", "weight loss", "clinical trials", "risks"],
+    "required_source_types": ["research"]
+  }
+]
