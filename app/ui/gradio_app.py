@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import threading
+from pathlib import Path
 
 import gradio as gr
 
@@ -13,6 +14,9 @@ from app.services.research_manager import run_research
 
 _STATE_LOCK = threading.Lock()
 _JOBS: dict[str, dict] = {}
+
+_EXPORTS_DIR = Path(__file__).resolve().parent.parent.parent / "exports"
+_EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def _format_progress(research_id: str) -> str:
@@ -107,18 +111,18 @@ def _export_json(research_id: str) -> str:
         "report": job.report,
         "metrics": repo.get_metrics(research_id),
     }
-    path = f"{research_id}_export.json"
+    path = _EXPORTS_DIR / f"{research_id}_export.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, default=str)
-    return path
+    return str(path)
 
 
 def _export_markdown(research_id: str) -> str:
     job = repo.get_job(research_id)
-    path = f"{research_id}_report.md"
+    path = _EXPORTS_DIR / f"{research_id}_report.md"
     with open(path, "w", encoding="utf-8") as f:
         f.write(job.report or "")
-    return path
+    return str(path)
 
 
 def start_research(question: str, depth: str, progress=gr.Progress()):
